@@ -25,6 +25,7 @@ export default function createSlider(Component) {
       disabled: PropTypes.bool,
       children: PropTypes.any,
       onBeforeChange: PropTypes.func,
+      onHover: PropTypes.func,
       onChange: PropTypes.func,
       onAfterChange: PropTypes.func,
       handle: PropTypes.func,
@@ -60,6 +61,7 @@ export default function createSlider(Component) {
         return <Handle {...restProps} key={index} />;
       },
       onBeforeChange: noop,
+      onHover: noop,
       onChange: noop,
       onAfterChange: noop,
       included: true,
@@ -90,6 +92,7 @@ export default function createSlider(Component) {
     }
 
     componentDidMount() {
+      console.log('creat comp mounted')
       // Snapshot testing cannot handle refs, so be sure to null-check this.
       this.document = this.sliderRef && this.sliderRef.ownerDocument;
 
@@ -115,8 +118,10 @@ export default function createSlider(Component) {
         const handlePosition = utils.getHandleCenterPosition(isVertical, e.target);
         this.dragOffset = position - handlePosition;
         position = handlePosition;
+        console.log('setting pos to', position)
       }
       this.removeDocumentEvents();
+      console.log('on start 5', position)
       this.onStart(position);
       this.addDocumentMouseEvents();
     }
@@ -149,6 +154,12 @@ export default function createSlider(Component) {
           onFocus(e);
         }
       }
+    }
+
+    onMouseOver = (e) => {
+      const isVertical = this.props.vertical;
+      let position = utils.getMousePosition(isVertical, e)
+      this.onHover(position)
     }
 
     onBlur = (e) => {
@@ -309,6 +320,7 @@ export default function createSlider(Component) {
           ref={this.saveSlider}
           className={sliderClassName}
           onTouchStart={disabled ? noop : this.onTouchStart}
+          onMouseOver={disabled ? noop : this.onMouseOver}
           onMouseDown={disabled ? noop : this.onMouseDown}
           onMouseUp={disabled ? noop : this.onMouseUp}
           onKeyDown={disabled ? noop : this.onKeyDown}

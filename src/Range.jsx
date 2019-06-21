@@ -106,6 +106,7 @@ class Range extends React.Component {
     props.onBeforeChange(bounds);
 
     const value = this.calcValueByPos(position);
+
     this.startValue = value;
     this.startPosition = position;
 
@@ -124,6 +125,16 @@ class Range extends React.Component {
     nextBounds[this.prevMovedHandleIndex] = value;
     this.onChange({ bounds: nextBounds });
   }
+
+  onHover(position) {
+    const bounds = this.getValue()
+    this.props.onBeforeChange(bounds);
+
+    const value = this.calcValueByPos(position)
+
+    this.props.onMouseOver(value)
+  }
+
 
   onEnd = (force) => {
     const { handle } = this.state;

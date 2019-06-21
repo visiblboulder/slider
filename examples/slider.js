@@ -134,7 +134,7 @@ ReactDOM.render(
   <div>
     <div style={style}>
       <p>Basic Slider</p>
-      <Slider onChange={log} />
+      <Slider onChange={log}/>
     </div>
     <div style={style}>
       <p>Basic Slider，`step=20`</p>
