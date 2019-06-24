@@ -1,7 +1,7 @@
 {
-  "name": "rc-slider",
+  "name": "@brandzooka/rc-slider",
   "version": "8.6.13",
-  "description": "Slider UI component for React",
+  "description": "Brandzooka specific modded range-slider for react",
   "keywords": [
     "react",
     "react-component",

@@ -135,6 +135,11 @@ class Range extends React.Component {
     this.props.onMouseOver(value)
   }
 
+  onLeave() {
+    this.props.onMouseLeave()
+  }
+
+
 
   onEnd = (force) => {
     const { handle } = this.state;

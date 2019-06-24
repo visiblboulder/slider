@@ -162,6 +162,10 @@ export default function createSlider(Component) {
       this.onHover(position)
     }
 
+    onMouseLeave = () => {
+      this.onLeave()
+    }
+
     onBlur = (e) => {
       const { onBlur } = this.props;
       this.onEnd();
@@ -321,6 +325,7 @@ export default function createSlider(Component) {
           className={sliderClassName}
           onTouchStart={disabled ? noop : this.onTouchStart}
           onMouseOver={disabled ? noop : this.onMouseOver}
+          onMouseLeave={disabled ? noop : this.onMouseLeave}
           onMouseDown={disabled ? noop : this.onMouseDown}
           onMouseUp={disabled ? noop : this.onMouseUp}
           onKeyDown={disabled ? noop : this.onKeyDown}
