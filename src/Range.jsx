@@ -124,13 +124,6 @@ class Range extends React.Component {
     });
 
     return
-
-    // const prevValue = bounds[this.prevMovedHandleIndex];
-    // if (value === prevValue) return;
-
-    // const nextBounds = [...state.bounds];
-    // nextBounds[this.prevMovedHandleIndex] = value;
-    // this.onChange({ bounds: nextBounds });
   }
 
   onHover(position) {

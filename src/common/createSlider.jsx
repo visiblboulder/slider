@@ -140,19 +140,6 @@ export default function createSlider(Component) {
       utils.pauseEvent(e);
     }
 
-    // onFocus = (e) => {
-    //   const { onFocus, vertical } = this.props;
-    //   if (utils.isEventFromHandle(e, this.handlesRefs)) {
-    //     const handlePosition = utils.getHandleCenterPosition(vertical, e.target);
-    //     this.dragOffset = 0;
-    //     this.onStart(handlePosition);
-    //     utils.pauseEvent(e);
-    //     if (onFocus) {
-    //       onFocus(e);
-    //     }
-    //   }
-    // }
-
     onMouseOver = (e) => {
       const isVertical = this.props.vertical;
       let position = utils.getMousePosition(isVertical, e)
@@ -321,7 +308,6 @@ export default function createSlider(Component) {
           onMouseDown={disabled ? noop : this.onMouseDown}
           onMouseUp={disabled ? noop : this.onMouseUp}
           onKeyDown={disabled ? noop : this.onKeyDown}
-          // onFocus={disabled ? noop : this.onFocus}
           onBlur={disabled ? noop : this.onBlur}
           style={style}
         >
