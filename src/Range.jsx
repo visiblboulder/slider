@@ -62,7 +62,12 @@ class Range extends React.Component {
 
     const { bounds } = this.state;
     const value = nextProps.value || bounds;
-    const nextBounds = value.map((v, i) => this.trimAlignValue(v, i, nextProps));
+
+    if (value.length % 2 !== 0){
+      return
+    }
+
+    const nextBounds = value
     if (nextBounds.length === bounds.length && nextBounds.every((v, i) => v === bounds[i])) return;
 
     this.setState({ bounds: nextBounds });
@@ -96,7 +101,7 @@ class Range extends React.Component {
 
     const data = { ...this.state, ...state };
     const changedValue = data.bounds;
-    props.onChange(changedValue);
+    props.onChange(changedValue, state.prevBounds);
   }
 
   onStart(position) {
@@ -118,12 +123,14 @@ class Range extends React.Component {
       recent: this.prevMovedHandleIndex,
     });
 
-    const prevValue = bounds[this.prevMovedHandleIndex];
-    if (value === prevValue) return;
+    return
 
-    const nextBounds = [...state.bounds];
-    nextBounds[this.prevMovedHandleIndex] = value;
-    this.onChange({ bounds: nextBounds });
+    // const prevValue = bounds[this.prevMovedHandleIndex];
+    // if (value === prevValue) return;
+
+    // const nextBounds = [...state.bounds];
+    // nextBounds[this.prevMovedHandleIndex] = value;
+    // this.onChange({ bounds: nextBounds });
   }
 
   onHover(position) {
@@ -134,12 +141,6 @@ class Range extends React.Component {
 
     this.props.onMouseOver(value)
   }
-
-  onLeave() {
-    this.props.onMouseLeave()
-  }
-
-
 
   onEnd = (force) => {
     const { handle } = this.state;
@@ -162,7 +163,12 @@ class Range extends React.Component {
     const oldValue = state.bounds[state.handle];
     if (value === oldValue) return;
 
-    this.moveTo(value);
+    const filter1 = !(/mediator-content-active$/g).test(e.target.className)
+    const filter2 = !(/rc-slider-track/g).test(e.target.className)
+
+    if (filter1 && filter2) {
+      this.moveTo(value);
+    }
   }
 
   onKeyboard(e) {
@@ -254,10 +260,16 @@ class Range extends React.Component {
       nextBounds.sort((a, b) => a - b);
       nextHandle = nextBounds.indexOf(value);
     }
+
+    if (nextBounds.length % 2 !== 0){
+      return
+    }
+
     this.onChange({
       recent: nextHandle,
       handle: nextHandle,
       bounds: nextBounds,
+      prevBounds: state.bounds
     });
     if (isFromKeyboardEvent) {
       // known problem: because setState is async,

@@ -1,6 +1,6 @@
 {
   "name": "@brandzooka/rc-slider",
-  "version": "8.6.13",
+  "version": "8.6.18",
   "description": "Brandzooka specific modded range-slider for react",
   "keywords": [
     "react",
@@ -10,14 +10,6 @@
     "input",
     "range"
   ],
-  "homepage": "http://github.com/react-component/slider/",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:react-component/slider.git"
-  },
-  "bugs": {
-    "url": "http://github.com/react-component/slider/issues"
-  },
   "files": [
     "assets/*.css",
     "lib",
