@@ -122,8 +122,6 @@ class Range extends React.Component {
       handle: this.prevMovedHandleIndex,
       recent: this.prevMovedHandleIndex,
     });
-
-    return
   }
 
   onHover(position) {
