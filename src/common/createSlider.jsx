@@ -25,6 +25,7 @@ export default function createSlider(Component) {
       disabled: PropTypes.bool,
       children: PropTypes.any,
       onBeforeChange: PropTypes.func,
+      onHover: PropTypes.func,
       onChange: PropTypes.func,
       onAfterChange: PropTypes.func,
       handle: PropTypes.func,
@@ -60,6 +61,7 @@ export default function createSlider(Component) {
         return <Handle {...restProps} key={index} />;
       },
       onBeforeChange: noop,
+      onHover: noop,
       onChange: noop,
       onAfterChange: noop,
       included: true,
@@ -138,17 +140,10 @@ export default function createSlider(Component) {
       utils.pauseEvent(e);
     }
 
-    onFocus = (e) => {
-      const { onFocus, vertical } = this.props;
-      if (utils.isEventFromHandle(e, this.handlesRefs)) {
-        const handlePosition = utils.getHandleCenterPosition(vertical, e.target);
-        this.dragOffset = 0;
-        this.onStart(handlePosition);
-        utils.pauseEvent(e);
-        if (onFocus) {
-          onFocus(e);
-        }
-      }
+    onMouseOver = (e) => {
+      const isVertical = this.props.vertical;
+      let position = utils.getMousePosition(isVertical, e)
+      this.onHover(position)
     }
 
     onBlur = (e) => {
@@ -309,10 +304,10 @@ export default function createSlider(Component) {
           ref={this.saveSlider}
           className={sliderClassName}
           onTouchStart={disabled ? noop : this.onTouchStart}
+          onMouseOver={disabled ? noop : this.onMouseOver}
           onMouseDown={disabled ? noop : this.onMouseDown}
           onMouseUp={disabled ? noop : this.onMouseUp}
           onKeyDown={disabled ? noop : this.onKeyDown}
-          onFocus={disabled ? noop : this.onFocus}
           onBlur={disabled ? noop : this.onBlur}
           style={style}
         >

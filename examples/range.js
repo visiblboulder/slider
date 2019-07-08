@@ -1,11 +1,11 @@
 /* eslint react/no-multi-comp: 0, no-console: 0 */
-import 'rc-slider/assets/index.less';
+import '../assets/index.less';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Slider from 'rc-slider';
-
-const Range = Slider.Range;
+// import Slider from 'rc-slider';
+// const Range = Slider.Range;
+import Range from '../src/Range.jsx'
 
 const style = { width: 400, margin: 50 };
 
@@ -161,7 +161,7 @@ ReactDOM.render(
   <div>
     <div style={style}>
       <p>Basic Range，`allowCross=false`</p>
-      <Range allowCross={false} defaultValue={[0, 20]} onChange={log} />
+      <Range allowCross={false} defaultValue={[0, 20]} onChange={log} onMouseOver={log} onMouseLeave={log}/>
     </div>
     <div style={style}>
       <p>Basic Range，`step=20` </p>
